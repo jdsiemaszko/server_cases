@@ -1,0 +1,86 @@
+#---------------------------General Params-------------------------------------#
+
+
+case : "merge_AVRM"
+
+data_folder : 'data'
+plots_folder : 'plots'
+
+
+#--------------------------Time Params--------------------------------------#
+nTimeSteps : 4000    #number of lagrangian time-steps
+writeInterval_plots : 400     
+
+deltaTc : 2.5e-4       #lagrangian, convection time-step
+
+
+#--------------------------Dipole Params------------------------------------#
+
+nu : 1.6e-3
+Gamma : 299.528385375226
+x1 : -1.0
+y1 : 0.1
+x2 : -1.0
+y2 : -0.1
+R : 0.1
+
+
+#---------------------------Lagrangian Params-------------------------------------#
+
+vInfx : 0.0           #freestream velocity in x direction
+vInfy : 0.0           #freestream velocity in y direction
+overlap : 1.0         #blobs' overlap ratio
+xMin : -1.5
+xMax : -0.5
+yMin : -0.6
+yMax : 0.6
+
+  #Computation Params
+hardware : "gpu"
+method : "direct"
+
+#Blob Control Params
+method_popControl : 'explicit'
+stepRedistribution : 0
+stepPopulationControl : 1
+gThresholdLocal : 1.0e-4
+gThresholdGlobal : 1.0e-4
+blobsRedistribute : 'all'
+
+  #Blob Diffusion Params
+method_diffusion : 'adaptive_vrm'
+
+avrm_params : {'useRelativeThresholds' : True, 'ignoreThreshold' : 1.0e-6,
+ 'adaptThreshold' : 1.0e-3 ,'Clapse' : 0.1, 'merge_flag' : True, 'stepMerge' : 1,
+  'mergeThreshold' : 0.001}
+
+  #Time integration Params
+time_integration_method : 'rk4'
+
+  #Kernel params
+kernel : 'gauss'
+coreSize : 'variable'
+
+  #xShift,yShift
+xShift : 0.0
+yShift : 0.0
+
+#--------------------------- Compression Params -------------------------------------#
+
+compressionFlag : True
+compression_stride : 1000
+
+compression_method : 'stock_merging'
+compression_params : {'compression' : 0.8}
+
+support_method : 'all'
+support_params : {}
+
+#---------------------------Plot Params-------------------------------------#
+nPlotPoints : 100    #plot points in each direction
+xMinPlot : -1.0       #minimum x to plot
+xMaxPlot : 1.0       #maximum x to plot
+yMinPlot : -0.25       #minimum y to plot
+yMaxPlot : 0.25      #maximum y to plot
+
+plot_flag : True
